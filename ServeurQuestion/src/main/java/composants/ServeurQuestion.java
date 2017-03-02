@@ -1,21 +1,22 @@
-package composant;
+package composants;
 
 
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.*;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
-@ComponentScan("composant")
+@Controller
+@ApiIgnore
 @SpringBootApplication
 public class ServeurQuestion {
 
-    /*@RequestMapping("/")
-    @ResponseBody
+    @RequestMapping("/")
     String home() {
-        return "Hello World!";
-    }*/
+        return "index.html";
+    }
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(ServeurQuestion.class, args);
