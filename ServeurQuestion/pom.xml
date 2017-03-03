@@ -8,19 +8,9 @@
 		<artifactId>interface2037</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>interface2037</groupId>
 	<artifactId>ServeurQuestion</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Maven</name>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

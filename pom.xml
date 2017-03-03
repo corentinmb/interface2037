@@ -6,9 +6,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module></module>
 		<module>ServeurQuestion</module>
-		<module>SystemExpert</module>
+		<module>SystemeExpert</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

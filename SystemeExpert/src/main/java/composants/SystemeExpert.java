@@ -9,10 +9,10 @@ import springfox.documentation.annotations.ApiIgnore;
 @Controller
 @ApiIgnore
 @SpringBootApplication
-public class SystemExpert {
+public class SystemeExpert {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SystemExpert.class, args);
+		SpringApplication.run(SystemeExpert.class, args);
 	}
 
 }
