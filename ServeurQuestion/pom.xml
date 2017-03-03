@@ -42,6 +42,18 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.4.0</version>
 		</dependency>
+		
+		<!-- JPA -->
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-data-jpa</artifactId>
+  		</dependency>
+  
+  		<!-- MYSQL -->
+  		<dependency>
+    		<groupId>mysql</groupId>
+    		<artifactId>mysql-connector-java</artifactId>
+  		</dependency>
 
 		<!-- LOGGER HTTP -->
 		<dependency>
