@@ -12,12 +12,33 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="questions")
 public class Question {
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+
+	@NotNull
+	private String libelle;
+
+	private String reponse;
+
+	private Date datecreation;
+
+	public Question() {
+	}
+
 	public Question(String libelle, String reponse, Date datecreation) {
 		super();
 		this.libelle = libelle;
 		this.reponse = reponse;
 		this.datecreation = datecreation;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getLibelle() {
@@ -44,15 +65,5 @@ public class Question {
 		this.datecreation = datecreation;
 	}
 
-	@Id
-	 @GeneratedValue(strategy = GenerationType.AUTO)
-	 private long id;
-	 
-	 @NotNull
-	 private String libelle;
-	 
-	 private String reponse;
-	 
-	 private Date datecreation;
 
 }
