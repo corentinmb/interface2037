@@ -1,4 +1,4 @@
-package composant.services;
+package composants.services;
 
 
 import org.springframework.http.HttpStatus;
