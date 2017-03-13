@@ -1,5 +1,8 @@
 *.class
 
+# On gitignore le application.properties du SQ pour pas divulguer les id de bdd
+ServeurQuestion/src/main/resources/application.properties
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
