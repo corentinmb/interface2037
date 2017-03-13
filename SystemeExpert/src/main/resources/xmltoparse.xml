@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Items>
+	<Item>
+		<question>je suis une question</question>
+		<response>je suis une reponse</response>
+	</Item>
+	<Item>
+		<question>je suis une autre question</question>
+		<response>je suis une autre reponse</response>
+	</Item>
+	<Item>
+		<question>Comment t'appelles-tu ?</question>
+		<response>Je suis l'oracle.</response>
+	</Item>
+</Items>
