@@ -1,9 +1,13 @@
 package composants.entitees;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+
 
 @Entity
 @Table(name="questions")
@@ -17,16 +21,23 @@ public class Question {
 
 	private String reponse;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "datecreation", updatable = false)
+	@JsonIgnore
 	private Date datecreation;
+
+	@PrePersist
+	protected void onCreate() {
+		datecreation = new Date();
+	}
 
 	public Question() {
 	}
 
-	public Question(String libelle, String reponse, Date datecreation) {
+	public Question(String libelle, String reponse) {
 		super();
 		this.libelle = libelle;
 		this.reponse = reponse;
-		this.datecreation = datecreation;
 	}
 
 	public Long getId() {
