@@ -1,6 +1,47 @@
-<h1>Je suis le serveur de questions</h1>
-<b>Tout fonctionne correctement :-)</b>
-<br/><br/>
-Vous pouvez consulter la doc de l'API <a href="swagger-ui.html">ici</a>.
-<br/><br/>
-Vous pouvez consulter les logs des requêtes HTTP <a href="trace">ici</a>.
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <link rel="stylesheet" href="app.css">
+    <title>Interfafce-2037</title>
+</head>
+<body>
+<style>
+    body{
+        width: 100%;
+    }
+    label.color{
+        padding-bottom: 5px;
+    }
+    .box{
+        margin: 0 auto;
+        width: 50%;
+        margin-top: 15%;
+    }
+    .send{
+        display: flex;
+        justify-content: center;
+    }
+</style>
+<div class="box">
+    <div class="row">
+        <form class="col s12" method="post" action="questions">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input name="libelle" type="text" class="validate">
+                </div>
+            </div>
+            <div class="send">
+                <button type="submit" class="waves-effect waves-light btn">Envoyer</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+<script type="text/javascript">
+    $('#textarea1').trigger('autoresize');
+</script>
+</body>
+</html>
