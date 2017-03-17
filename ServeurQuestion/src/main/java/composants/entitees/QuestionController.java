@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/questions")
@@ -13,12 +16,17 @@ public class QuestionController {
 
     @RequestMapping(method = RequestMethod.GET)
     Collection<Question> getQuestions(){
-        return this.questionDAO.findAll();
+        return questionDAO.findAll();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     Question getQuestion(@PathVariable Long id){
-        return this.questionDAO.findOne(id);
+        return questionDAO.findOne(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/last")
+    Question getLastQuestion(){
+        return Collections.max(questionDAO.findAll(), Comparator.comparing(c -> c.getDatecreation()));
     }
 
     @RequestMapping(method = RequestMethod.POST)
