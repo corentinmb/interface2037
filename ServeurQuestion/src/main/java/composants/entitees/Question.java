@@ -34,10 +34,9 @@ public class Question {
 	public Question() {
 	}
 
-	public Question(String libelle, String reponse) {
+	public Question(String libelle) {
 		super();
 		this.libelle = libelle;
-		this.reponse = reponse;
 	}
 
 	public Long getId() {

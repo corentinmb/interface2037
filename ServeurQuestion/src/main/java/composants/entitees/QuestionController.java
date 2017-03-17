@@ -30,8 +30,9 @@ public class QuestionController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Question addQuestion(@RequestBody Question question) {
-        return questionDAO.saveAndFlush(question);
+    public Question addQuestion(@RequestParam(value = "libelle", required = false) String libelle) {
+        Question q = new Question(libelle);
+        return questionDAO.saveAndFlush(q);
     }
 
     /*@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
