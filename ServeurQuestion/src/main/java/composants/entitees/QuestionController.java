@@ -34,13 +34,8 @@ public class QuestionController {
         return questionDAO.saveAndFlush(question);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public Question updateQuestion(@RequestBody Question question) {
-        return questionDAO.saveAndFlush(question);
-    }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    /*@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteQuestion(@PathVariable Long id) {
         questionDAO.delete(id);
-    }
+    }*/
 }
