@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:inline="text">Détails de la question n°[[${q.id}]]</title>
+</head>
+<body>
+
+<p class="content" th:utext="${q.id}">id</p>
+<p class="content" th:utext="${q.libelle}">libelle</p>
+<p class="content" th:utext="${q.reponse}">reponse</p>
+
+</body>
+</html>

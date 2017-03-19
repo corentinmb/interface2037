@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
-    <link rel="stylesheet" href="app.css">
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css"/>
+    <!--<link rel="stylesheet" href="app.css"/>-->
     <title>Interface-2037</title>
 </head>
 <body>
@@ -29,7 +29,8 @@
         <form id="formQuestion" class="col s12" method="post" action="questions">
             <div class="row">
                 <div class="input-field col s12">
-                    <input name="libelle" type="text" class="validate">
+                    <input id="libelle" autocomplete="false" maxlength="255" data-length="255" name="libelle" type="text" class="validate" required=""/>
+                    <label for="libelle" type="text">Quelle est votre question ?</label>
                 </div>
             </div>
             <div class="send">
@@ -51,7 +52,7 @@
                 url : 'questions', // or whatever
                 dataType : 'json',
                 success : function (response) {
-                    window.location.replace("questions/" + response.id);
+                    window.location.href= "details/" + response.id;
                 }
             })
         ;
