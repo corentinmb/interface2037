@@ -38,6 +38,9 @@ public class QuestionController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Question> addQuestion(@RequestParam(value = "libelle", required = false) String libelle) {
+        if (questionRepository.findOneByLibelle(libelle) != null){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(questionRepository.findOneByLibelle(libelle));
+        }
         Question q = new Question(libelle);
         
         // Ajout de la question dans la file rabbitMQ :
@@ -55,4 +58,10 @@ public class QuestionController {
     public void deleteQuestion(@PathVariable Long id) {
         questionDAO.delete(id);
     }*/
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public Question updateQuestion(@RequestBody Question question) {
+        return questionRepository.saveAndFlush(question);
+    }
+
 }
