@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -38,20 +39,26 @@ public class QuestionController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Question> addQuestion(@RequestParam(value = "libelle", required = false) String libelle) {
-        if (questionRepository.findOneByLibelle(libelle) != null){
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(questionRepository.findOneByLibelle(libelle));
+
+        for(Question item : questionRepository.findAll()) {
+            int lev = StringUtils.getLevenshteinDistance(libelle, item.getLibelle());
+            double ratio = ((double) lev) / (Math.max(libelle.length(), item.getLibelle().length()));
+            if (ratio <= 0.15) {
+                return ResponseEntity.status(HttpStatus.OK).body(item);
+            }
         }
+
         Question q = new Question(libelle);
-        
+
         // Ajout de la question dans la file rabbitMQ :
         try {
-			RabbitMQConnector.sendQuestionToQueue(RabbitMQConnector.getConnection(), q);			
+			RabbitMQConnector.sendQuestionToQueue(RabbitMQConnector.getConnection(), q);
 			return ResponseEntity.status(HttpStatus.OK).body(questionRepository.saveAndFlush(q));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
-        
+
     }
 
     /*@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
