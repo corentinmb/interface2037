@@ -40,4 +40,10 @@ public class QuestionController {
     public void deleteQuestion(@PathVariable Long id) {
         questionDAO.delete(id);
     }*/
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public Question updateQuestion(@RequestBody Question question) {
+        return questionRepository.saveAndFlush(question);
+    }
+
 }
