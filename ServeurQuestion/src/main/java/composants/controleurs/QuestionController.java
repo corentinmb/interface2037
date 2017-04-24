@@ -2,12 +2,18 @@ package composants.controleurs;
 
 import composants.entitees.Question;
 import composants.entitees.QuestionRepository;
+import composants.entitees.RabbitMQConnector;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.concurrent.TimeoutException;
 
 @RestController
 @RequestMapping("/questions")
@@ -31,9 +37,18 @@ public class QuestionController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Question addQuestion(@RequestParam(value = "libelle", required = false) String libelle) {
+    public ResponseEntity<Question> addQuestion(@RequestParam(value = "libelle", required = false) String libelle) {
         Question q = new Question(libelle);
-        return questionRepository.saveAndFlush(q);
+        
+        // Ajout de la question dans la file rabbitMQ :
+        try {
+			RabbitMQConnector.sendQuestionToQueue(RabbitMQConnector.getConnection(), q);			
+			return ResponseEntity.status(HttpStatus.OK).body(questionRepository.saveAndFlush(q));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+        
     }
 
     /*@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
