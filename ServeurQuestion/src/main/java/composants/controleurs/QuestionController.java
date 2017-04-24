@@ -32,6 +32,9 @@ public class QuestionController {
 
     @RequestMapping(method = RequestMethod.POST)
     public Question addQuestion(@RequestParam(value = "libelle", required = false) String libelle) {
+        if (questionRepository.findOneByLibelle(libelle) != null){
+            return questionRepository.findOneByLibelle(libelle);
+        }
         Question q = new Question(libelle);
         return questionRepository.saveAndFlush(q);
     }

@@ -7,4 +7,5 @@ import javax.transaction.Transactional;
 @Transactional
 public interface QuestionRepository extends JpaRepository<Question, Long> {
 
+    Question findOneByLibelle (String libelle);
 }
