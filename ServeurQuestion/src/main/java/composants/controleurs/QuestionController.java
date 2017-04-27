@@ -34,7 +34,7 @@ public class QuestionController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/last")
     Question getLastQuestion(){
-        return Collections.max(questionRepository.findAll(), Comparator.comparing(c -> c.getDatecreation()));
+        return Collections.min(questionRepository.findAll(), Comparator.comparing(c -> c.getDatecreation()));
     }
 
     @RequestMapping(method = RequestMethod.POST)
