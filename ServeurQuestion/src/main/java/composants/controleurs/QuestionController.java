@@ -46,11 +46,9 @@ public class QuestionController {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 		} catch (Exception e) {
 			System.out.println(e);
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(null);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
-    
-
+	}
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Question> addQuestion(
 			@RequestParam(value = "libelle", required = false) String libelle) {
