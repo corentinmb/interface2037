@@ -11,26 +11,28 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.junit.BeforeClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 /**
  * Created by corentin on 27/04/2017.
  */
 public class ServeurQuestionDef {
     private String URL_API = "http://localhost:8080/questions/";
+    private String EP_GET_QUESTION_EN_ATTENTE = "last";
     private HttpClient httpClient;
-    private HttpPost request;
+    private HttpPost requestPOST;
+    private HttpGet requestGET;
     private ObjectMapper mapper;
     private ArrayList<NameValuePair> postParameters;
     private HttpResponse response;
@@ -41,7 +43,6 @@ public class ServeurQuestionDef {
     @Before
     public void init(){
         httpClient = HttpClients.createDefault();
-        request = new HttpPost( URL_API );
         mapper = new ObjectMapper();
         postParameters = new ArrayList<NameValuePair>();
     }
@@ -49,11 +50,12 @@ public class ServeurQuestionDef {
     @Transactional
     @Quand("^l'usager pose une question au serveur$")
     public void l_usager_pose_une_question_au_serveur() throws Throwable {
+        requestPOST = new HttpPost( URL_API );
         String question = "Qui est Emmanuel Macron ?";
         postParameters.add(new BasicNameValuePair("libelle", question));
-        request.setEntity(new UrlEncodedFormEntity(postParameters));
+        requestPOST.setEntity(new UrlEncodedFormEntity(postParameters));
         try{
-            response = httpClient.execute(request);
+            response = httpClient.execute(requestPOST);
         } catch (Exception e){
                 throw e;
         }
@@ -71,8 +73,18 @@ public class ServeurQuestionDef {
 
     @Etantdonné("^qu'il existe une question en attente de réponse$")
     public void qu_il_existe_une_question_en_attente_de_réponse() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        //l_usager_pose_une_question_au_serveur();
+
+        requestGET = new HttpGet( URL_API + EP_GET_QUESTION_EN_ATTENTE);
+        try{
+            response = httpClient.execute(requestGET);
+        } catch (Exception e){
+            throw e;
+        }
+        String responseBody = EntityUtils.toString(response.getEntity());
+        //TODO pb de test... on reçoit une 200 au lieu de 204
+        assertNotEquals(204,response.getStatusLine().getStatusCode());
     }
 
     @Quand("^le système expert demande la prochaine question au serveur$")
