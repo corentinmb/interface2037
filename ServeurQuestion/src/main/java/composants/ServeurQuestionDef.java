@@ -6,6 +6,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.fr.Alors;
 import cucumber.api.java.fr.Etantdonné;
 import cucumber.api.java.fr.Quand;
+import org.apache.http.ExceptionLogger;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -50,18 +52,21 @@ public class ServeurQuestionDef {
         String question = "Qui est Emmanuel Macron ?";
         postParameters.add(new BasicNameValuePair("libelle", question));
         request.setEntity(new UrlEncodedFormEntity(postParameters));
-        response = httpClient.execute(request);
+        try{
+            response = httpClient.execute(request);
+        } catch (Exception e){
+                throw e;
+        }
     }
 
     @Alors("^le serveur indique qu'il a enregistré la question$")
     public void le_serveur_indique_qu_il_a_enregistré_la_question() throws Throwable {
-        assertEquals(200, response.getStatusLine().getStatusCode());
+        assertEquals(201, response.getStatusLine().getStatusCode());
     }
 
     @Alors("^il permet à l'usager de localiser la réponse lorsqu'elle sera disponible$")
     public void il_permet_à_l_usager_de_localiser_la_réponse_lorsqu_elle_sera_disponible() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new UnsupportedOperationException("Not supported yet.");
+        assertNotNull(response.getHeaders("Location"));
     }
 
     @Etantdonné("^qu'il existe une question en attente de réponse$")
