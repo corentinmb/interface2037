@@ -1,36 +1,90 @@
 package composants;
 
-import cucumber.api.PendingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import composants.entitees.QuestionRepository;
+import cucumber.api.java.Before;
 import cucumber.api.java.fr.Alors;
 import cucumber.api.java.fr.Etantdonné;
 import cucumber.api.java.fr.Quand;
+import org.apache.http.ExceptionLogger;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.junit.BeforeClass;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by corentin on 27/04/2017.
  */
 public class ServeurQuestionDef {
+    private String URL_API = "http://localhost:8080/questions/";
+    private String EP_GET_QUESTION_EN_ATTENTE = "last";
+    private HttpClient httpClient;
+    private HttpPost requestPOST;
+    private HttpGet requestGET;
+    private ObjectMapper mapper;
+    private ArrayList<NameValuePair> postParameters;
+    private HttpResponse response;
+
+    @Autowired
+    private QuestionRepository questionRepository;
+
+    @Before
+    public void init(){
+        httpClient = HttpClients.createDefault();
+        mapper = new ObjectMapper();
+        postParameters = new ArrayList<NameValuePair>();
+    }
+
+    @Transactional
     @Quand("^l'usager pose une question au serveur$")
     public void l_usager_pose_une_question_au_serveur() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new UnsupportedOperationException("Not supported yet.");
+        requestPOST = new HttpPost( URL_API );
+        String question = "Qui est Emmanuel Macron ?";
+        postParameters.add(new BasicNameValuePair("libelle", question));
+        requestPOST.setEntity(new UrlEncodedFormEntity(postParameters));
+        try{
+            response = httpClient.execute(requestPOST);
+        } catch (Exception e){
+                throw e;
+        }
     }
 
     @Alors("^le serveur indique qu'il a enregistré la question$")
     public void le_serveur_indique_qu_il_a_enregistré_la_question() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new UnsupportedOperationException("Not supported yet.");
+        assertEquals(201, response.getStatusLine().getStatusCode());
     }
 
     @Alors("^il permet à l'usager de localiser la réponse lorsqu'elle sera disponible$")
     public void il_permet_à_l_usager_de_localiser_la_réponse_lorsqu_elle_sera_disponible() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new UnsupportedOperationException("Not supported yet.");
+        assertNotNull(response.getHeaders("Location"));
     }
 
     @Etantdonné("^qu'il existe une question en attente de réponse$")
     public void qu_il_existe_une_question_en_attente_de_réponse() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        //l_usager_pose_une_question_au_serveur();
+
+        requestGET = new HttpGet( URL_API + EP_GET_QUESTION_EN_ATTENTE);
+        try{
+            response = httpClient.execute(requestGET);
+        } catch (Exception e){
+            throw e;
+        }
+        String responseBody = EntityUtils.toString(response.getEntity());
+        //TODO pb de test... on reçoit une 200 au lieu de 204
+        assertNotEquals(204,response.getStatusLine().getStatusCode());
     }
 
     @Quand("^le système expert demande la prochaine question au serveur$")

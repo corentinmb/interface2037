@@ -5,13 +5,19 @@ import composants.entitees.QuestionRepository;
 import composants.entitees.RabbitMQConnector;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.util.UriTemplate;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.net.URI;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -54,7 +60,7 @@ public class QuestionController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Question> addQuestion(
-			@RequestParam(value = "libelle", required = false) String libelle) {
+			@RequestParam(value = "libelle", required = false) String libelle, HttpServletRequest request) {
 
 		// for(Question item : questionRepository.findAll()) {
 		// int lev = StringUtils.getLevenshteinDistance(libelle,
@@ -71,9 +77,13 @@ public class QuestionController {
 		// Ajout de la question dans la file rabbitMQ :
 		try {
 			Question question = questionRepository.saveAndFlush(q);
-			RabbitMQConnector.sendQuestionToQueue(
-					RabbitMQConnector.getConnection(), question);
-			return ResponseEntity.status(HttpStatus.OK).body(question);
+			RabbitMQConnector.sendQuestionToQueue(RabbitMQConnector.getConnection(), question);
+
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Location", request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getRequestURI() + question.getId());
+
+			return ResponseEntity.status(HttpStatus.CREATED).headers(headers).body(question);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
