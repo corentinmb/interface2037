@@ -6,6 +6,7 @@ import composants.entitees.RabbitMQConnector;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.apache.commons.lang3.StringUtils;
@@ -46,9 +47,11 @@ public class QuestionController {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 		} catch (Exception e) {
 			System.out.println(e);
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(null);
 		}
 	}
+
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Question> addQuestion(
 			@RequestParam(value = "libelle", required = false) String libelle) {
@@ -67,10 +70,10 @@ public class QuestionController {
 
 		// Ajout de la question dans la file rabbitMQ :
 		try {
+			Question question = questionRepository.saveAndFlush(q);
 			RabbitMQConnector.sendQuestionToQueue(
-					RabbitMQConnector.getConnection(), q);
-			return ResponseEntity.status(HttpStatus.OK).body(
-					questionRepository.saveAndFlush(q));
+					RabbitMQConnector.getConnection(), question);
+			return ResponseEntity.status(HttpStatus.OK).body(question);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -84,8 +87,9 @@ public class QuestionController {
 	 * void deleteQuestion(@PathVariable Long id) { questionDAO.delete(id); }
 	 */
 
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Question updateQuestion(@RequestBody Question question) {
+		System.out.println("PUT : UPDATE QUESTION : " + question);
 		return questionRepository.saveAndFlush(question);
 	}
 
