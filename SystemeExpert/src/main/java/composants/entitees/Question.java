@@ -1,4 +1,4 @@
-package composants.items;
+package composants.entitees;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonParseException;

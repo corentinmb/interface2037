@@ -1,10 +1,11 @@
-package composants.items;
+package composants.entitees;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.apache.commons.lang3.StringUtils;
-
+import java.util.ListIterator;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,6 +16,10 @@ public class Items {
 
 	public List<Item> getItems() {
 		return items;
+	}
+
+	public Item getItem(int id){
+		return items.get(id);
 	}
 
 	@XmlElement(name = "Item")
@@ -32,11 +37,15 @@ public class Items {
 		while (i < items.size()) {
 			itemResponse = items.get(i);
 			List<String> arrayExpert = new ArrayList<>(Arrays.asList(itemResponse.getQuestion().split(",")));
+			arrayExpert.addAll(new ArrayList<>(Arrays.asList(itemResponse.getResponse().split(" "))));
+			replace(arrayExpert);
+
 			List<String> arrayUtilisateur = new ArrayList<>(Arrays.asList(q.split(" ")));
+			replace(arrayUtilisateur);
 
 			for(String value1 : arrayExpert){
 				for(String value2 : arrayUtilisateur){
-					if(value1.equals(value2)){ ++matchCount; break; }
+					if(StringUtils.stripAccents(value1).equals(StringUtils.stripAccents(value2))){ ++matchCount; break; }
 				}
 			}
 			assocScores.add(matchCount);
@@ -51,7 +60,15 @@ public class Items {
 			}
 		}
 
-
 		return items.get(maxIndex).getResponse();
+	}
+
+	public static void replace(List<String> strings)
+	{
+		ListIterator<String> iterator = strings.listIterator();
+		while (iterator.hasNext())
+		{
+			iterator.set(iterator.next().toLowerCase());
+		}
 	}
 }

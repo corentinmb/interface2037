@@ -1,10 +1,11 @@
-package composants.items;
+package composants.config;
 
 import java.io.File;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
+import composants.entitees.Items;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,7 +20,6 @@ public class ItemsConfiguration {
 			JAXBContext jaxbContext = JAXBContext.newInstance(Items.class);
 	
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			//Customer customer = (Customer) jaxbUnmarshaller.unmarshal(file);
 			Items items = (Items) jaxbUnmarshaller.unmarshal(file);
 			return items;
 		}catch(Exception e){

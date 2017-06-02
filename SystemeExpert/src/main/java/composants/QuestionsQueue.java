@@ -1,7 +1,6 @@
 package composants;
 
-import composants.items.Items;
-import composants.services.ItemsWS;
+import composants.entitees.Items;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +12,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-import composants.items.Question;
+import composants.entitees.Question;
 import org.springframework.stereotype.Component;
 
 @Component

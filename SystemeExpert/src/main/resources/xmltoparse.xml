@@ -9,6 +9,10 @@
 		<response>Emmanuel MACRON (En Marche)</response>
 	</Item>
 	<Item>
+		<question>qui,macron,est,il,parcours,biographie,carrière,vie</question>
+		<response>Ancien banquier d'affaires chez Rotschild.</response>
+	</Item>
+	<Item>
 		<question>quand,élu,president,république,francaise,date,2017</question>
 		<response>Le président a été élu le 6 mai 2017.</response>
 	</Item>

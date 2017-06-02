@@ -1,4 +1,4 @@
-package composants.items;
+package composants.entitees;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -7,7 +7,15 @@ public class Item {
 	
 	private String question;
 	private String response;
-	
+
+	public Item(String question, String response) {
+		this.question = question;
+		this.response = response;
+	}
+
+	public Item() {
+	}
+
 	public String getQuestion() {
 		return question;
 	}
