@@ -10,18 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
-import org.springframework.web.util.UriTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.net.URI;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.concurrent.TimeoutException;
 
 @RestController
 @RequestMapping("/questions")
@@ -48,9 +39,11 @@ public class QuestionController {
 					.getLastQuestion(RabbitMQConnector.getConnection());
 			if (question != null) {
 				return ResponseEntity.status(HttpStatus.OK).body(question);
+			} else
+			{
+				System.out.println("question est nulle");
+				return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 			}
-			System.out.println("question est nulle");
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 		} catch (Exception e) {
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -61,16 +54,6 @@ public class QuestionController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Question> addQuestion(
 			@RequestParam(value = "libelle", required = false) String libelle, HttpServletRequest request) {
-
-		// for(Question item : questionRepository.findAll()) {
-		// int lev = StringUtils.getLevenshteinDistance(libelle,
-		// item.getLibelle());
-		// double ratio = ((double) lev) / (Math.max(libelle.length(),
-		// item.getLibelle().length()));
-		// if (ratio <= 0.15) {
-		// return ResponseEntity.status(HttpStatus.OK).body(item);
-		// }
-		// }
 
 		Question q = new Question(libelle);
 

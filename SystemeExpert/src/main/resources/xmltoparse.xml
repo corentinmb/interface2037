@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Items>
 	<Item>
-		<question>je suis une question</question>
-		<response>je suis une reponse</response>
+		<question>problèmes,box,pas,internet,connexion,rj45,cables,localhost</question>
+		<response>Veuillez vérifier si le branchement de vos câbles est correct et si tous les voyants sont allumés sur votre box internet.</response>
 	</Item>
 	<Item>
-		<question>je suis une autre question</question>
-		<response>je suis une autre reponse</response>
+		<question>président,republique,française,france</question>
+		<response>Emmanuel MACRON (En Marche)</response>
 	</Item>
 	<Item>
-		<question>Comment t'appelles-tu ?</question>
-		<response>Je suis l'oracle.</response>
+		<question>quand,élu,president,république,francaise,date,2017</question>
+		<response>Le président a été élu le 6 mai 2017.</response>
 	</Item>
 </Items>

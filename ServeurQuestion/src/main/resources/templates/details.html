@@ -4,6 +4,16 @@
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css"/>
     <title th:inline="text">Détails de la question n°[[${q.id}]]</title>
+    <script type="text/javascript"
+            src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script th:inline="javascript">
+        $(document).ready(
+            function() {
+                setInterval(function() {
+                   $("#reponse").load("http://localhost:8081/details/[[${q.id}]] #reponse");
+                }, 500);
+            });
+    </script>
 </head>
 <body>
 <div style="text-align: center; display: flex;">
@@ -26,7 +36,7 @@
             <div class="col s12 m12">
                 <div class="card-panel teal">
           <span class="white-text">
-              <p class="content" th:utext="${q.reponse!=null and not #strings.isEmpty(q.reponse)}? ${q.reponse} : 'En attente d\'une réponse de notre expert ...'"></p>
+              <p id="reponse" class="content" th:utext="${q.reponse!=null and not #strings.isEmpty(q.reponse)}? ${q.reponse} : 'En attente d\'une réponse de notre expert ...'"></p>
           </span>
                 </div>
             </div>

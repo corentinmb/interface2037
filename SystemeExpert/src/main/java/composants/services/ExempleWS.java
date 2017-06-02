@@ -39,7 +39,7 @@ public class ExempleWS {
 
 	@RequestMapping(path="/test", method = RequestMethod.GET)
 	public List<Item> test() {
-		return items.getItem();
+		return items.getItems();
 	}
 }
 

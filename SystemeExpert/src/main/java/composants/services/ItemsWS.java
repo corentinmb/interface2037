@@ -20,15 +20,11 @@ public class ItemsWS {
 	
 	@RequestMapping(path="/getall", method = RequestMethod.GET)
 	public List<Item> getall() {
-		return items.getItem();
+		return items.getItems();
 	}
 	
 	@RequestMapping(path="/getresponse", method = RequestMethod.POST)
 	public String getItem(@RequestParam(name="question") String question){
-		//String question = "Comment t'appelles-tu ?";
-		Item item = items.getItem().stream()
-			.filter(i -> i.getQuestion().equals(question))
-			.findFirst().get();
-		return item.getResponse();
+		return items.findResponse(question);
 	}
 }

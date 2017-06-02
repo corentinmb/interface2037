@@ -1,11 +1,10 @@
 package composants;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-
+import composants.items.Items;
+import composants.services.ItemsWS;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -13,23 +12,33 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.mashape.unirest.request.GetRequest;
 
 import composants.items.Question;
+import org.springframework.stereotype.Component;
 
-public class Main {
+@Component
+public class QuestionsQueue {
 
-	private static final int SLEEPING_TIME = 30000;
-	
-	private static final String URL_QUESTION_PUT = "http://localhost:8080/questions";
-	private static final String URL_LAST_QUESTION = "http://localhost:8080/questions/last";
+	@Value("${serveurQuestionServer}")
+	private String SERVER;
+	private String URL_QUESTION_PUT;
+	private  String URL_LAST_QUESTION;
 
-	public static void main(String[] args) throws InterruptedException {
-		
+	private int SLEEPING_TIME = 500;
+
+
+	@Autowired
+	private Items items;
+
+	public void run() throws InterruptedException {
+
+		URL_QUESTION_PUT = "http://" + SERVER + ":8081/questions";
+		URL_LAST_QUESTION = "http://" + SERVER + ":8081/questions/last";
+
 		while(true){
 			try {
 				HttpResponse<String> request = Unirest.get(URL_LAST_QUESTION).asString();
-				
+
 				if(request.getStatus() == HttpStatus.OK.value()){
 					System.out.println("STATUS 200");
 					String responseString = request.getBody();
@@ -38,23 +47,20 @@ public class Main {
 					System.out.println("question : " + responseString);
 				}else if (request.getStatus() == HttpStatus.NO_CONTENT.value()) {
 					System.out.println("Pas de question en attente");
-					System.out.println("Le système va se mettre en veille pendant 30 secondes");
+					System.out.println("Le système va se mettre en veille pendant 500 millisecondes");
 					Thread.sleep(SLEEPING_TIME);
 				}
 			} catch (Exception e) {
 				System.out.println(e);
-				System.out.println("Erreur : Le système va se mettre en veille pendant 30 secondes");
+				System.out.println("Erreur : Le système va se mettre en veille pendant 500 millisecondes");
 				Thread.sleep(SLEEPING_TIME);
 			}
 		}
-		
-		
 	}
-	
-	
-	
-	public static void answer(Question question) throws UnirestException, JsonProcessingException {
-		question.findResponse();
+
+	public void answer(Question question) throws UnirestException, JsonProcessingException {
+		String responseQ = items.findResponse(question.getLibelle());
+		question.setReponse(responseQ);
 		HttpResponse<JsonNode> response = Unirest.put(URL_QUESTION_PUT).header("Content-Type", "application/json").body(new JSONObject(question.toJson())).asJson();
 		System.out.println(response.getBody());
 	}
