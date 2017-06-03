@@ -18,8 +18,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class QuestionsQueue {
 
-	@Value("${serveurQuestionServer}")
-	private String SERVER;
 	private String URL_QUESTION_PUT;
 	private  String URL_LAST_QUESTION;
 
@@ -31,8 +29,8 @@ public class QuestionsQueue {
 
 	public void run() throws InterruptedException {
 
-		URL_QUESTION_PUT = "http://" + SERVER + ":8081/questions";
-		URL_LAST_QUESTION = "http://" + SERVER + ":8081/questions/last";
+		URL_QUESTION_PUT = "http://localhost:8081/questions";
+		URL_LAST_QUESTION = "http://localhost:8081/questions/last";
 
 		while(true){
 			try {

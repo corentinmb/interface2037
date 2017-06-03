@@ -10,6 +10,7 @@
 	</parent>
 	<artifactId>SystemeExpert</artifactId>
 	<build>
+		<finalName>SystemeExpert</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -43,17 +44,15 @@
 			<version>4.5.3</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java -->
-<dependency>
-    <groupId>com.mashape.unirest</groupId>
-    <artifactId>unirest-java</artifactId>
-    <version>1.4.9</version>
-</dependency>
+		<dependency>
+			<groupId>com.mashape.unirest</groupId>
+			<artifactId>unirest-java</artifactId>
+			<version>1.4.9</version>
+		</dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>RELEASE</version>
         </dependency>
-
-
     </dependencies>
 </project>

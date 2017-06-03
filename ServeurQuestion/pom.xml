@@ -10,6 +10,7 @@
 	</parent>
 	<artifactId>ServeurQuestion</artifactId>
 	<build>
+		<finalName>ServeurQuestion</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
