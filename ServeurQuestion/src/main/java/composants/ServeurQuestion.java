@@ -3,6 +3,7 @@ package composants;
 
 import composants.entitees.Question;
 import composants.entitees.QuestionRepository;
+import composants.entitees.RabbitMQConnector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
@@ -32,5 +33,8 @@ public class ServeurQuestion {
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(ServeurQuestion.class, args);
+        System.out.println(" CONNEXION A RABBITMQ:");
+        if(RabbitMQConnector.getConnection()!= null)
+            System.out.println("OK");
     }
 }

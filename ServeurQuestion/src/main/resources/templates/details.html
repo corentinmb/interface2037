@@ -10,7 +10,8 @@
         $(document).ready(
             function() {
                 setInterval(function() {
-                   $("#reponse").load("http://localhost:8081/details/[[${q.id}]] #reponse");
+                   $("#reponse").load("http://" + document.location.hostname + ":8081/details/[[${q.id}]] #reponse");
+                   console.log(document.location.hostname);
                 }, 500);
             });
     </script>

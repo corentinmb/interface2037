@@ -29,8 +29,8 @@ public class QuestionsQueue {
 
 	public void run() throws InterruptedException {
 
-		URL_QUESTION_PUT = "http://localhost:8081/questions";
-		URL_LAST_QUESTION = "http://localhost:8081/questions/last";
+		URL_QUESTION_PUT = "http://serveurquestion:8081/questions";
+		URL_LAST_QUESTION = "http://serveurquestion:8081/questions/last";
 
 		while(true){
 			try {
@@ -40,6 +40,7 @@ public class QuestionsQueue {
 					System.out.println("STATUS 200");
 					String responseString = request.getBody();
 					Question question = Question.getQuestionFromJson(responseString);
+					System.out.println(question.toString());
 					answer(question);
 					System.out.println("question : " + responseString);
 				}else if (request.getStatus() == HttpStatus.NO_CONTENT.value()) {
@@ -57,6 +58,7 @@ public class QuestionsQueue {
 
 	public void answer(Question question) throws UnirestException, JsonProcessingException {
 		String responseQ = items.findResponse(question.getLibelle());
+		System.out.println(responseQ);
 		question.setReponse(responseQ);
 		HttpResponse<JsonNode> response = Unirest.put(URL_QUESTION_PUT).header("Content-Type", "application/json").body(new JSONObject(question.toJson())).asJson();
 		System.out.println(response.getBody());

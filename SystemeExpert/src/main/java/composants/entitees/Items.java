@@ -29,6 +29,7 @@ public class Items {
 
 
 	public String findResponse(String q) {
+		System.out.println(items.toString());
 		int i = 0;
 		int matchCount = 0;
 		List<Integer> assocScores = new ArrayList<>();
