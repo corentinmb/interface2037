@@ -42,7 +42,7 @@ public class RabbitMQConnector {
 	}
 
 	public static void sendQuestionToQueue(Connection connection,
-			Question question) throws IOException, TimeoutException {
+										   Question question) throws IOException, TimeoutException {
 		ObjectWriter ow = new ObjectMapper().writer()
 				.withDefaultPrettyPrinter();
 		// open channel & queue
@@ -54,6 +54,7 @@ public class RabbitMQConnector {
 				MessageProperties.PERSISTENT_TEXT_PLAIN,
 				ow.writeValueAsBytes(question));
 
+		// close everything
 		channel.close();
 		connection.close();
 	}
@@ -70,7 +71,7 @@ public class RabbitMQConnector {
 		long nbMessage = channel.messageCount(QUEUE_NAME);
 		QueueingConsumer consumer = new QueueingConsumer(channel);
 		channel.basicConsume(QUEUE_NAME, consumer);
-		
+
 		System.out.println("nombre message : " + nbMessage);
 		if (nbMessage >= 1) {
 			QueueingConsumer.Delivery delivery = consumer.nextDelivery();
