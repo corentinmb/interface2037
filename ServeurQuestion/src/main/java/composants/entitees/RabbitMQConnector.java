@@ -44,7 +44,8 @@ public class RabbitMQConnector {
 				ow.writeValueAsBytes(question));
 
 		// close everything
-		connection.close();
+		//channel.close();
+		//connection.close();
 	}
 
 	public Question getLastQuestion(Connection connection) throws IOException,
@@ -67,7 +68,8 @@ public class RabbitMQConnector {
 		else
 			q = null;
 
-		connection.close();
+		//channel.close();
+		//connection.close();
 
 		return q;
 	}
