@@ -38,7 +38,6 @@ public class RabbitMQConnector {
 			TimeoutException {
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost(RABBIT_MQ_HOST);
-		factory.setRequestedHeartbeat(10);
 		return factory.newConnection();
 	}
 
@@ -54,10 +53,6 @@ public class RabbitMQConnector {
 		channel.basicPublish("", QUEUE_NAME,
 				MessageProperties.PERSISTENT_TEXT_PLAIN,
 				ow.writeValueAsBytes(question));
-
-		// close everything
-		channel.close();
-
 	}
 
 	public Question getLastQuestion(Connection connection) throws IOException,
@@ -93,7 +88,7 @@ public class RabbitMQConnector {
 
 		// channel.basicConsume(QUEUE_NAME, false, consumer);
 		// Thread.sleep(1000);
-		channel.close();
+		//channel.close();
 
 		return q;
 	}
