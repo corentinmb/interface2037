@@ -33,8 +33,8 @@ public class ServeurQuestion {
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(ServeurQuestion.class, args);
-        System.out.println(" CONNEXION A RABBITMQ:");
+        /*System.out.println(" CONNEXION A RABBITMQ:");
         if(RabbitMQConnector.getConnection()!= null)
-            System.out.println("OK");
+            System.out.println("OK");*/
     }
 }
