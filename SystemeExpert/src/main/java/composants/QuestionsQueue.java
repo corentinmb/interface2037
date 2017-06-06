@@ -21,7 +21,7 @@ public class QuestionsQueue {
 	private String URL_QUESTION_PUT;
 	private  String URL_LAST_QUESTION;
 
-	private int SLEEPING_TIME = 500;
+	private int SLEEPING_TIME = 2000;
 
 
 	@Autowired
