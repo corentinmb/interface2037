@@ -56,7 +56,6 @@ public class RabbitMQConnector {
 
 		// close everything
 		channel.close();
-		connection.close();
 	}
 
 	public Question getLastQuestion(Connection connection) throws IOException,
@@ -93,7 +92,6 @@ public class RabbitMQConnector {
 		// channel.basicConsume(QUEUE_NAME, false, consumer);
 		// Thread.sleep(1000);
 		channel.close();
-		connection.close();
 
 		return q;
 	}
