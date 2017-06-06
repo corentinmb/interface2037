@@ -1,6 +1,7 @@
 package composants.config;
 
 import java.io.File;
+import java.io.InputStream;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
@@ -14,9 +15,9 @@ public class ItemsConfiguration {
 	@Bean(name="items")
 	public Items itemsloader() {
 		try{
-			String filename = "xmltoparse.xml";
+			String filename = "/xmltoparse.xml";
 			ClassLoader classLoader = getClass().getClassLoader();
-			File file = new File(classLoader.getResource(filename).getFile());
+			InputStream file = getClass().getResourceAsStream(filename);
 			JAXBContext jaxbContext = JAXBContext.newInstance(Items.class);
 	
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
