@@ -29,8 +29,8 @@ public class QuestionsQueue {
 
 	public void run() throws InterruptedException {
 
-		URL_QUESTION_PUT = "http://serveurquestion:8081/questions";
-		URL_LAST_QUESTION = "http://serveurquestion:8081/questions/last";
+		URL_QUESTION_PUT = "http://localhost:8081/questions";
+		URL_LAST_QUESTION = "http://localhost:8081/questions/last";
 
 		while(true){
 			try {
