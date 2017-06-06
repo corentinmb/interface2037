@@ -44,7 +44,6 @@ public class RabbitMQConnector {
 				ow.writeValueAsBytes(question));
 
 		// close everything
-		channel.close();
 		connection.close();
 	}
 
@@ -68,7 +67,6 @@ public class RabbitMQConnector {
 		else
 			q = null;
 
-		channel.close();
 		connection.close();
 
 		return q;
