@@ -38,6 +38,7 @@ public class RabbitMQConnector {
 			TimeoutException {
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost(RABBIT_MQ_HOST);
+		factory.setRequestedHeartbeat(10);
 		return factory.newConnection();
 	}
 
@@ -56,6 +57,7 @@ public class RabbitMQConnector {
 
 		// close everything
 		channel.close();
+
 	}
 
 	public Question getLastQuestion(Connection connection) throws IOException,
