@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
  * Created by corentin on 27/04/2017.
  */
 public class ServeurQuestionDef {
-    private String URL_API = "http://localhost:8080/questions/";
+    private String URL_API = "http://serveurquestion:8080/questions/";
     private String EP_GET_QUESTION_EN_ATTENTE = "last";
     private HttpClient httpClient;
     private HttpPost requestPOST;

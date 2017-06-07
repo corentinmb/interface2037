@@ -10,7 +10,7 @@ import org.codehaus.jackson.map.ObjectWriter;
 
 public class RabbitMQConnector {
 
-	private static final String RABBIT_MQ_HOST = "localhost";
+	private static final String RABBIT_MQ_HOST = "rabbitmq";
 	private static final String QUEUE_NAME = "QuestionLine";
 	private static final boolean durable = true;
 	private Question q;
