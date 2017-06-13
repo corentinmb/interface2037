@@ -31,14 +31,14 @@ public class Items {
 	public String findResponse(String q) {
 		System.out.println(items.toString());
 		int i = 0;
-		int matchCount = 0;
 		List<Integer> assocScores = new ArrayList<>();
 		Item itemResponse = null;
 
 		while (i < items.size()) {
+			int matchCount = 0;
 			itemResponse = items.get(i);
 			List<String> arrayExpert = new ArrayList<>(Arrays.asList(itemResponse.getQuestion().split(",")));
-			arrayExpert.addAll(new ArrayList<>(Arrays.asList(itemResponse.getResponse().split(" "))));
+			//arrayExpert.addAll(new ArrayList<>(Arrays.asList(itemResponse.getResponse().split(" "))));
 			replace(arrayExpert);
 
 			List<String> arrayUtilisateur = new ArrayList<>(Arrays.asList(q.split(" ")));
@@ -46,7 +46,8 @@ public class Items {
 
 			for(String value1 : arrayExpert){
 				for(String value2 : arrayUtilisateur){
-					if(StringUtils.stripAccents(value1).equals(StringUtils.stripAccents(value2))){ ++matchCount; break; }
+					if(StringUtils.stripAccents(value1).equals(StringUtils.stripAccents(value2)) ||
+							StringUtils.stripAccents(value2).contains(StringUtils.stripAccents(value1))){ ++matchCount; break; }
 				}
 			}
 			assocScores.add(matchCount);
@@ -56,12 +57,17 @@ public class Items {
 		int maxIndex = 0;
 		for (int id = 1; id < assocScores.size(); id++) {
 			int newnumber = assocScores.get(id);
-			if ((newnumber > assocScores.get(maxIndex))) {
+			if ((newnumber > assocScores.get(maxIndex)) && newnumber > 1) {
 				maxIndex = id;
 			}
 		}
+		if(maxIndex == 0 && assocScores.get(maxIndex) <= 1)
+			maxIndex = -1;
 
-		return items.get(maxIndex).getResponse();
+		if(maxIndex != -1)
+			return items.get(maxIndex).getResponse();
+		else
+			return null;
 	}
 
 	public static void replace(List<String> strings)

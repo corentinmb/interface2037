@@ -5,11 +5,11 @@
 		<response>Veuillez vérifier si le branchement de vos câbles est correct et si tous les voyants sont allumés sur votre box internet.</response>
 	</Item>
 	<Item>
-		<question>président,republique,française,france</question>
+		<question>qui,président,republique,française,france</question>
 		<response>Emmanuel MACRON (En Marche)</response>
 	</Item>
 	<Item>
-		<question>qui,macron,est,il,parcours,biographie,carrière,vie</question>
+		<question>qui,macron,parcours,biographie,carrière,vie</question>
 		<response>Ancien banquier d'affaires chez Rotschild.</response>
 	</Item>
 	<Item>

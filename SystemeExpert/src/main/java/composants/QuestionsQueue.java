@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class QuestionsQueue {
 
 	private String URL_QUESTION_PUT;
-	private  String URL_LAST_QUESTION;
+	private  String URL_NEXT_QUESTION;
 
 	private int SLEEPING_TIME = 2000;
 
@@ -30,11 +30,11 @@ public class QuestionsQueue {
 	public void run() throws InterruptedException {
 
 		URL_QUESTION_PUT = "http://localhost:8081/questions";
-		URL_LAST_QUESTION = "http://localhost:8081/questions/last";
+		URL_NEXT_QUESTION = "http://localhost:8081/questions/next";
 
 		while(true){
 			try {
-				HttpResponse<String> request = Unirest.get(URL_LAST_QUESTION).asString();
+				HttpResponse<String> request = Unirest.get(URL_NEXT_QUESTION).asString();
 
 				if(request.getStatus() == HttpStatus.OK.value()){
 					System.out.println("STATUS 200");
