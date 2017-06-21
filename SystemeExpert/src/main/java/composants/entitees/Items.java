@@ -54,8 +54,8 @@ public class Items {
 			i++;
 		}
 
-		int maxIndex = 0;
-		for (int id = 1; id < assocScores.size(); id++) {
+		int maxIndex = assocScores.get(0);
+		for (int id = 1; id < assocScores.size(); id++) { //size -1
 			int newnumber = assocScores.get(id);
 			if ((newnumber > assocScores.get(maxIndex)) && newnumber > 1) {
 				maxIndex = id;
