@@ -9,7 +9,6 @@
 		<response>Emmanuel MACRON (En Marche)</response>
 	</Item>
 	<Item>
-		<question>macron,est,il,parcours,biographie,carrière,vie, reussite</question>
 		<question>qui,macron,parcours,biographie,carrière,vie</question>
 		<response>Ancien banquier d'affaires chez Rotschild.</response>
 	</Item>
@@ -43,7 +42,7 @@
 	</Item>
 	<Item>
 		<question>facebook, réseaux, sociaux, social, book, mark ,zuckerberg, Marc, ZUCKERBERG</question>
-		<response>Ah facebook et son célèbre créateur mark zuckerberg ! Qu'est que les jeunes fairais sans ça !</response>
+		<response>Ah facebook et son célèbre créateur mark zuckerberg ! Qu'est que les jeunes ferai sans ça !</response>
 	</Item>
 	<Item>
 		<question>facebook, date, create, création, 2004</question>
@@ -58,16 +57,16 @@
 		<response> YouTube à été crée le 14 février 2005, San Mateo, Californie, États-Unis</response>
 	</Item>
 	<Item>
-		<question>Neflix, film, series, continue, streaming</question>
+		<question>quand, ou, Neflix, film, series, continue, streaming</question>
 		<response> Netflix à été crée 29 août 1997, Scotts Valley, Californie, États-Unis</response>
 	</Item>
 	<Item>
 		<question>Slack, chat, tchat, IRC, logiciel, gestion, projet</question>
-		<response> Slack est une plate-forme de communication collaborative propriétaire (SaaS) ainsi qu'un logiciel de gestion de projets créé par Stewart Butterfield (en) en août 2013 et officiellement lancée en février 2014. En octobre 2014, la startup est valorisée à plus d'un milliard de dollars1,2.</response>
+		<response> Slack est une plate-forme de communication collaborative propriétaire .En octobre 2014, la startup est valorisée à plus d'un milliard de dollars.</response>
 	</Item>
 	<Item>
 		<question>Edouard, Joseph, Snowden, informaticien, celebre, CIA, espions</question>
-		<response>Edward Joseph Snowden, né le 21 juin 1983 à Elizabeth City, Caroline du Nord, est un informaticien américain1, ancien employé de la Central Intelligence Agency (CIA) et de la National Security Agency (NSA), qui a révélé les détails de plusieurs programmes de surveillance de masse américains et britanniques.</response>
+		<response>Edward Joseph Snowden, né le 21 juin 1983 à Elizabeth City, Caroline du Nord, est un informaticien américain1, ancien employé de la(CIA) et de la NSA.</response>
 	</Item>
 	<Item>
 		<question>git, hub, github, versionning, performant, souvent, ink</question>
@@ -75,18 +74,14 @@
 	</Item>
 	<Item>
 		<question>git, hub, github, versionning, performant, souvent, ink</question>
-		<response>GitHub est un service web d'hébergement et de gestion de développement de logiciels, utilisant le logiciel de gestion de versions Git. Ce site est développé en Ruby on Rails et Erlang par Chris Wanstrath, PJ Hyett et Tom Preston-Werner.</response>
+		<response>GitHub est un service web d'hébergement et de gestion de développement de logiciels, utilisant le logiciel de gestion de versions Git.</response>
 	</Item>
 	<Item>
 		<question>cloud, computing, google, nuages, stockage, performant, internet, sauvegrde, sauvegarder</question>
-		<response>Le terme Cloud (nuage en anglais), particulièrement dans l'air du temps, recouvre l'ensemble des solutions de stockage distant. En clair, vos données, au lieu d'être stockées sur vos disques durs ou mémoires, sont disponibles sur des serveurs distants et accessibles par internet. Les différents intervenants disposent à cet effet de gigantesques champs de serveurs de stockages appelés Datacenter. Le Cloud est aussi souvent appelé Cloud Computing ou Nuage Informatique.</response>
+		<response>Le terme Cloud (nuage en anglais), particulièrement dans l'air du temps, recouvre l'ensemble des solutions de stockage distant.</response>
 	</Item>
 	<Item>
 		<question>dell, pc, windows, fondateur, intel</question>
 			<response>Un bon pc</response>
-	</Item>
-	<Item>
-		<question>null</question>
-		<response>Je n'ai aucune réponse à votre question ou je n'ai pas compris le sens de votre question.</response>
 	</Item>
 </Items>
