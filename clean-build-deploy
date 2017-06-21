@@ -4,13 +4,21 @@ docker rm -f rabbitmq
 docker rm -f mysql-serv-q
 
 cd ServeurQuestion/
+<<<<<<< HEAD
 mvn clean install
+=======
+mvn package
+>>>>>>> master
 docker build -f Dockerfile -t serveurquestion .
 
 cd ..
 
 cd SystemeExpert/
+<<<<<<< HEAD
 mvn clean install
+=======
+mvn package
+>>>>>>> master
 docker build -f Dockerfile -t systemeexpert  .
 
 docker run -d --name=rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:3-management

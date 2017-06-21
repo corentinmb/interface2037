@@ -30,13 +30,13 @@ public class QuestionController {
 		return questionRepository.findOne(id);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/last")
-	public ResponseEntity<Question> getLastQuestion() {
+	@RequestMapping(method = RequestMethod.GET, value = "/next")
+	public ResponseEntity<Question> getNextQuestion() {
 		// return Collections.max(questionRepository.findAll(),
 		// Comparator.comparing(c -> c.getDatecreation()));
 		try {
 			Question question = new RabbitMQConnector()
-					.getLastQuestion(RabbitMQConnector.getConnection());
+					.getNextQuestion(RabbitMQConnector.getConnection());
 			if (question != null) {
 				return ResponseEntity.status(HttpStatus.OK).body(question);
 			} else

@@ -9,11 +9,79 @@
 		<response>Emmanuel MACRON (En Marche)</response>
 	</Item>
 	<Item>
-		<question>qui,macron,est,il,parcours,biographie,carrière,vie</question>
+		<question>qui,macron,parcours,biographie,carrière,vie</question>
 		<response>Ancien banquier d'affaires chez Rotschild.</response>
 	</Item>
 	<Item>
-		<question>quand,élu,president,république,francaise,date,2017</question>
+		<question>elu,election,president,république,francaise,date,2017, president de la republique</question>
 		<response>Le président a été élu le 6 mai 2017.</response>
+	</Item>
+	<Item>
+		<question>date,cree,internet</question>
+		<response>Internet a été crée en 1994.</response>
+	</Item>
+	<Item>
+		<question>date,cree,creation, jours,année,youtube</question>
+		<response>Youtube a été crée le 24 Février 2005.</response>
+	</Item>
+	<Item>
+		<question>rj45,couleur,cable,cablage, reseau, filliere, fils</question>
+		<response>Le RJ45 est le nom usuel du connecteur 8P8C (8 positions et 8 contacts électriques) utilisé couramment pour les connexions Ethernet, et pour les connecteurs téléphoniques. .</response>
+	</Item>
+	<Item>
+		<question>date,version,création,windows, bill, gates, Bill Gates</question>
+		<response>La première version de Windows date du 20 novembre 1985.</response>
+	</Item>
+	<Item>
+		<question>web, service, web-service, web-services, curl</question>
+		<response>Ah on parle de web-service, c'est super</response>
+	</Item>
+	<Item>
+		<question>wikipedia, données, wiki, ressource</question>
+		<response>Ah on parle de Wikipédia qui à été lancée officiellement le 15 janvier 2001 pour soutenir Nupedia</response>
+	</Item>
+	<Item>
+		<question>facebook, réseaux, sociaux, social, book, mark ,zuckerberg, Marc, ZUCKERBERG</question>
+		<response>Ah facebook et son célèbre créateur mark zuckerberg ! Qu'est que les jeunes ferai sans ça !</response>
+	</Item>
+	<Item>
+		<question>quand, cree, facebook, date, create, création, 2004</question>
+		<response>Facebook a été créé en 2004</response>
+	</Item>
+	<Item>
+		<question>quand, cree, twitter, twit, bird, oiseaux, création, 2006</question>
+		<response> Twitter a été créé le 21 mars 2006 par Jack Dorsey, Evan Williams, Biz Stone et Noah Glass</response>
+	</Item>
+	<Item>
+		<question>quand, cree, you, tube, youtube, vidéo, streaming, live, youtubeurs, youtubeuses</question>
+		<response> YouTube à été créé le 14 février 2005, San Mateo, Californie, États-Unis</response>
+	</Item>
+	<Item>
+		<question>quand, ou, Netflix, film, series, continue, streaming</question>
+		<response> Netflix à été crée 29 août 1997, Scotts Valley, Californie, États-Unis</response>
+	</Item>
+	<Item>
+		<question>Slack, chat, tchat, IRC, logiciel, gestion, projet</question>
+		<response> Slack est une plate-forme de communication collaborative propriétaire .En octobre 2014, la startup est valorisée à plus d'un milliard de dollars.</response>
+	</Item>
+	<Item>
+		<question>quand, né, Edouard, Joseph, Snowden, informaticien, celebre, CIA, espions</question>
+		<response>Edward Joseph Snowden, né le 21 juin 1983 à Elizabeth City, Caroline du Nord, est un informaticien américain1, ancien employé de la(CIA) et de la NSA.</response>
+	</Item>
+	<Item>
+		<question>git, hub, github, versionning, performant, souvent, ink</question>
+		<response>GitHub est un service web d'hébergement et de gestion de développement de logiciels, utilisant le logiciel de gestion de versions Git. Ce site est développé en Ruby on Rails et Erlang par Chris Wanstrath, PJ Hyett et Tom Preston-Werner.</response>
+	</Item>
+	<Item>
+		<question>git, hub, github, versionning, performant, souvent, ink</question>
+		<response>GitHub est un service web d'hébergement et de gestion de développement de logiciels, utilisant le logiciel de gestion de versions Git.</response>
+	</Item>
+	<Item>
+		<question>cloud, computing, google, nuages, stockage, performant, internet, sauvegrde, sauvegarder</question>
+		<response>Le terme Cloud (nuage en anglais), particulièrement dans l'air du temps, recouvre l'ensemble des solutions de stockage distant.</response>
+	</Item>
+	<Item>
+		<question>dell, pc, windows, fondateur, intel</question>
+			<response>Un bon pc</response>
 	</Item>
 </Items>

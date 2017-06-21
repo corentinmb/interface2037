@@ -1,6 +1,7 @@
 package composants;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import composants.entitees.Question;
 import composants.entitees.QuestionRepository;
 import cucumber.api.java.Before;
 import cucumber.api.java.fr.Alors;
@@ -16,10 +17,12 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.codehaus.jackson.map.ObjectReader;
 import org.junit.BeforeClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -28,8 +31,13 @@ import static org.junit.Assert.*;
  * Created by corentin on 27/04/2017.
  */
 public class ServeurQuestionDef {
+<<<<<<< HEAD
     private String URL_API = "http://serveurquestion:8080/questions/";
     private String EP_GET_QUESTION_EN_ATTENTE = "last";
+=======
+    private String URL_API = "http://localhost:8081/questions/";
+    private String EP_GET_QUESTION_EN_ATTENTE = "next";
+>>>>>>> master
     private HttpClient httpClient;
     private HttpPost requestPOST;
     private HttpGet requestGET;
@@ -42,7 +50,6 @@ public class ServeurQuestionDef {
 
     @Before
     public void init(){
-        httpClient = HttpClients.createDefault();
         mapper = new ObjectMapper();
         postParameters = new ArrayList<NameValuePair>();
     }
@@ -50,6 +57,7 @@ public class ServeurQuestionDef {
     @Transactional
     @Quand("^l'usager pose une question au serveur$")
     public void l_usager_pose_une_question_au_serveur() throws Throwable {
+        httpClient = HttpClients.createDefault();
         requestPOST = new HttpPost( URL_API );
         String question = "Qui est Emmanuel Macron ?";
         postParameters.add(new BasicNameValuePair("libelle", question));
@@ -74,7 +82,14 @@ public class ServeurQuestionDef {
     @Etantdonné("^qu'il existe une question en attente de réponse$")
     public void qu_il_existe_une_question_en_attente_de_réponse() throws Throwable {
 
-        //l_usager_pose_une_question_au_serveur();
+        Question q = new Question("Qui est Emmanuel Macron ?");
+        assertEquals(q.getReponse(),null);
+    }
+
+    @Quand("^le système expert demande la prochaine question au serveur$")
+    public void le_système_expert_demande_la_prochaine_question_au_serveur() throws Throwable {
+        // On simule une nouvelle question insérée dans la queue
+        l_usager_pose_une_question_au_serveur();
 
         requestGET = new HttpGet( URL_API + EP_GET_QUESTION_EN_ATTENTE);
         try{
@@ -82,39 +97,52 @@ public class ServeurQuestionDef {
         } catch (Exception e){
             throw e;
         }
-        String responseBody = EntityUtils.toString(response.getEntity());
-        //TODO pb de test... on reçoit une 200 au lieu de 204
-        assertNotEquals(204,response.getStatusLine().getStatusCode());
-    }
 
-    @Quand("^le système expert demande la prochaine question au serveur$")
-    public void le_système_expert_demande_la_prochaine_question_au_serveur() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new UnsupportedOperationException("Not supported yet.");
+        assertEquals(200,response.getStatusLine().getStatusCode());
     }
 
     @Alors("^il récupère la question en attente$")
     public void il_récupère_la_question_en_attente() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new UnsupportedOperationException("Not supported yet.");
+        // On simule une nouvelle question insérée dans la queue
+        l_usager_pose_une_question_au_serveur();
+
+        requestGET = new HttpGet( URL_API + EP_GET_QUESTION_EN_ATTENTE);
+        try{
+            response = httpClient.execute(requestGET);
+            System.out.println(response.toString());
+
+        } catch (Exception e){
+            throw e;
+        }
+        ObjectReader or = new org.codehaus.jackson.map.ObjectMapper().reader(Question.class);
+
+        String responseBody = EntityUtils.toString(response.getEntity());
+
+        Question q = or.readValue(responseBody);
+        assertEquals("Qui est Emmanuel Macron ?",q.getLibelle());
+        assertEquals(null,q.getReponse());
     }
 
     @Alors("^la question suivante devient la question en attente$")
     public void la_question_suivante_devient_la_question_en_attente() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new UnsupportedOperationException("Not supported yet.");
+        il_récupère_la_question_en_attente();
     }
 
     @Etantdonné("^qu'il n'existe aucune question$")
     public void qu_il_n_existe_aucune_question() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new UnsupportedOperationException("Not supported yet.");
+        requestGET = new HttpGet( URL_API + EP_GET_QUESTION_EN_ATTENTE);
+        try{
+            response = httpClient.execute(requestGET);
+        } catch (Exception e){
+            throw e;
+        }
+
+        assertEquals(204,response.getStatusLine().getStatusCode());
     }
 
     @Alors("^le serveur indique qu'il n'existe pas de question$")
     public void le_serveur_indique_qu_il_n_existe_pas_de_question() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new UnsupportedOperationException("Not supported yet.");
+        qu_il_n_existe_aucune_question();
     }
 
     @Alors("^le système expert se met veille avant de redemander une question$")
@@ -125,8 +153,7 @@ public class ServeurQuestionDef {
 
     @Etantdonné("^que le système expert a récupéré une question en attente$")
     public void que_le_système_expert_a_récupéré_une_question_en_attente() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new UnsupportedOperationException("Not supported yet.");
+        il_récupère_la_question_en_attente();
     }
 
     @Etantdonné("^qu'il a trouvé une réponse$")
@@ -149,8 +176,7 @@ public class ServeurQuestionDef {
 
     @Etantdonné("^qu'un usager a posé une question$")
     public void qu_un_usager_a_posé_une_question() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new UnsupportedOperationException("Not supported yet.");
+        il_récupère_la_question_en_attente();
     }
 
     @Etantdonné("^aucun système expert n'a encore traité la question$")

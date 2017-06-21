@@ -48,10 +48,10 @@ public class RabbitMQConnector {
 		connection.close();
 	}
 
-	public Question getLastQuestion(Connection connection) throws IOException,
+	public Question getNextQuestion(Connection connection) throws IOException,
 			TimeoutException, ShutdownSignalException,
 			ConsumerCancelledException, InterruptedException {
-		System.out.println("get last question");
+		System.out.println("get next question");
 		ObjectReader or = new ObjectMapper().reader(Question.class);
 		Channel channel = connection.createChannel();
 		channel.queueDeclare(QUEUE_NAME, true, false, false, null);
