@@ -46,8 +46,10 @@ public class Items {
 
 			for(String value1 : arrayExpert){
 				for(String value2 : arrayUtilisateur){
-					if(StringUtils.stripAccents(value1).equals(StringUtils.stripAccents(value2)) ||
-							StringUtils.stripAccents(value2).contains(StringUtils.stripAccents(value1))){ ++matchCount; break; }
+					if(StringUtils.stripAccents(value1.trim()).equals(StringUtils.stripAccents(value2.trim()))){
+						matchCount++;
+						break;
+					}
 				}
 			}
 			assocScores.add(matchCount);
